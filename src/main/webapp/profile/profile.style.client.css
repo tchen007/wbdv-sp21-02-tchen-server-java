@@ -8,12 +8,12 @@ select {
     /*!*box-sizing:content-box;*!*/
 }
 
-.success-text {
-    width: 100%;
-    padding: 10px;
-    background-color: #dbecdb;
-    color: #507654
-}
+/*.success-text {*/
+/*    width: 100%;*/
+/*    padding: 10px;*/
+/*    background-color: #dbecdb;*/
+/*    color: #507654*/
+/*}*/
 
 /*select{*/
 /*    width: 385px;*/
