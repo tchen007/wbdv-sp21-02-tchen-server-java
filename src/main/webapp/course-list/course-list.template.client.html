@@ -19,6 +19,7 @@
                     aria-expanded="false" aria-haspopup="true">
                     <span class="navbar-toggler-icon"></span>
             </button>
+<!--        d-none d-md-block = hidden on all screens smaller than md-->
             <a class="navbar-brand d-none d-md-block" href="../index.html">
                 Course Manager
             </a>
@@ -29,23 +30,203 @@
             </div>
     </div>
     <form class="form-inline my-lg-0 row">
-<!--        <div class="mb-3 col-10">-->
             <input class="form-control mr-sm-2 font-italic col-8" type="text" placeholder="New Course Title" aria-label="Add">
             <button class="btn btn-danger rounded-circle mx-3" type="submit">
                 <span class="fas fa-plus"></span>
             </button>
-<!--        </div>-->
     </form>
 </nav>
 
+<table class="table offset-sm-1 col-sm-10 border">
+    <thead class="thead-light">
+        <tr class="border-3">
+            <th class="width-title">Title</th>
+            <th class="width-col d-none d-sm-table-cell">Owned by</th>
+            <th class="width-col d-none d-sm-table-cell">Last modified by</th>
+            <th class="width-icons d-none d-sm-table-cell">
+                <span class="fas fa-filter"></span>
+            </th>
+            <th class="width-icons d-none d-sm-table-cell">
+            <span class="fas fa-sort-alpha-up-alt"></span>
+        </th>
+            <th class="width-icons"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="6" class="font-weight-bold margin-doc">Today</td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CY-5501 Cybersecurity Fundamentals
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CY-5503 Web Development
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CS-5505 Foundations of Software Engineering
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CS-5510 UI and Good Design Practices
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CS-5520 Human Computer Interaction
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" class="font-weight-bold margin-doc">Yesterday</td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CY-5501 Cybersecurity Fundamentals
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CY-5503 Web Development
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CS-5505 Foundations of Software Engineering
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" class="font-weight-bold margin-doc">Previous 7 days</td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CY-5501 Cybersecurity Fundamentals
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CY-5503 Web Development
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CS-5505 Foundations of Software Engineering
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CS-5510 UI and Good Design Practices
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CS-5520 Human Computer Interaction
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="fad fa-file margin-doc"></span>
+                CS-5520 Human Computer Interaction
+            </td>
+            <td class="text-black-50 d-none d-sm-table-cell">me</td>
+            <td colspan="3" class="text-black-50 d-none d-sm-table-cell">1/25/2021 6:55 PM</td>
+            <td>
+                <span class="fad fa-minus-circle margin-trash"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!--Button at Bottom Right-->
 <div class="col-12">
     <button class="btn btn-danger rounded-circle wd-bottom-right" type="submit">
         <span class="fas fa-plus fa-2x"></span>
     </button>
 </div>
-
-
-
-
 </body>
 </html>
