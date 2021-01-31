@@ -13,32 +13,37 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-primary navbar-dark">
-    <a class="navbar-brand" href="../index.html">
-        Course Manager
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDropdown"
-        aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarDropdown">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Login</a></li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Profile</a></li>
-        </ul>
-        <form class="form-inline my-lg-0">
-            <input class="form-control mr-sm-2 font-italic" type="text" placeholder="New Course Title" aria-label="Add">
-            <button class="btn btn-danger my-2 my-sm-0 rounded-circle" type="submit">
+<nav class="navbar bg-primary navbar-dark">
+    <div class="row">
+            <button class="navbar-toggler mx-3" type="button" data-toggle="dropdown" id="navbarMenuDropdown"
+                    aria-expanded="false" aria-haspopup="true">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand d-none d-md-block" href="../index.html">
+                Course Manager
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarMenuDropdown">
+                <a class="dropdown-item" href="../index.html">Home</a>
+                <a class="dropdown-item" href="../login/login.template.client.html">Login</a>
+                <a class="dropdown-item" href="../profile/profile.template.client.html">Profile</a>
+            </div>
+    </div>
+    <form class="form-inline my-lg-0 row">
+<!--        <div class="mb-3 col-10">-->
+            <input class="form-control mr-sm-2 font-italic col-8" type="text" placeholder="New Course Title" aria-label="Add">
+            <button class="btn btn-danger rounded-circle mx-3" type="submit">
                 <span class="fas fa-plus"></span>
             </button>
-        </form>
-    </div>
-
+<!--        </div>-->
+    </form>
 </nav>
+
+<div class="col-12">
+    <button class="btn btn-danger rounded-circle wd-bottom-right" type="submit">
+        <span class="fas fa-plus fa-2x"></span>
+    </button>
+</div>
+
 
 
 
