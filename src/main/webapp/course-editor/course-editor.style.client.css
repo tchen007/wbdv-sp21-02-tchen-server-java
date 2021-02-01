@@ -1,0 +1,17 @@
+.color-white {
+    color: white;
+}
+
+.active-dark {
+    color: #495057;
+    background-color: #bdbdbd;
+    border-color: black;
+}
+
+.tab-border {
+    border: solid 1px white;
+}
+
+.nav-link:hover {
+    color: #808080;
+}
