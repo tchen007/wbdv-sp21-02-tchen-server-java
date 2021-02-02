@@ -3,25 +3,4 @@ select {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     padding: 5px;
-    /*width: 100%;*/
-    /*padding: 5px;*/
-    /*!*box-sizing:content-box;*!*/
 }
-
-/*.success-text {*/
-/*    width: 100%;*/
-/*    padding: 10px;*/
-/*    background-color: #dbecdb;*/
-/*    color: #507654*/
-/*}*/
-
-/*select{*/
-/*    width: 385px;*/
-/*    height: 30px;*/
-/*}*/
-
-/*input, select{*/
-/*    box-sizing: border-box;*/
-/*    -moz-box-sizing: border-box;*/
-/*    -webkit-box-sizing: border-box;*/
-/*}*/
