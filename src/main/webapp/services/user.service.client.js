@@ -1,0 +1,1 @@
+// Implements the user service client encapsulating all data communication with server
