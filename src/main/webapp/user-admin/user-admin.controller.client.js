@@ -62,7 +62,16 @@
         $roleFld[0].selectedIndex=0;
     }
 
-    function deleteUser() { }
+    function deleteUser(event) {
+        console.log(event.target)
+        console.log($removeBtn.attr("class"))
+
+        var removeBtn = $(event.target)
+        var removeId = removeBtn.attr("id")
+        console.log(removeId)
+        users.splice(removeId, 1)
+        renderUsers(users)
+    }
 
     function selectUser() { } // WHAT IS THIS SUPPOSE TO DO?
         // It is when the pencil is pressed the 2nd row is populated
@@ -81,29 +90,16 @@
                     <td class="wbdv-role pt-4 pl-3">${user.role}</td>
                     <td class="wbdv-actions">
                         <span class="text-nowrap float-right">
-                            <button class="btn wbdv-remove" id="${u}">
-                                <i class="fa-2x fa fa-times fa-fw"></i>
-                            </button>
-                            <button class="btn wbdv-edit">
-                                <i class="fa-2x fa fa-pencil fa-fw"></i>
-                            </button>
+                            <button class="btn wbdv-remove fa-2x fa fa-times" id="${u}"></button>
+                            <button class="btn wbdv-edit fa-2x fa fa-pencil"></button>
                         </span>
                     </td>
                 </tr>`
             )
-            // $removeBtn = $(".wbdv-remove");
-            // $removeBtn.click(deleteUser);
-            // $editBtn = $(".wbdv-edit")
-
-
-            // const rowClone = $userRowTemplate.clone();
-            // rowClone.find('.wbdv-username').html(user.username);
-            // rowClone.find('.wbdv-first-name').html(user.firstName);
-            // rowClone.find('.wbdv-last-name').html(user.lastName);
-            // rowClone.find('.wbdv-role').html(user.role);
-            // $tbody.append(rowClone);
-            // rowClone.removeClass('wbdv-hidden');
         };
+        $removeBtn = $(".wbdv-remove");
+        $removeBtn.click(deleteUser);
+        // $editBtn = $(".wbdv-edit")
     }
 
 }) ()
