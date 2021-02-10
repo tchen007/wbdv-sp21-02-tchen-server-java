@@ -1,29 +1,12 @@
 // Controller handling user events and rendering dynamic portions of user admin page
 (function () {
-    // var $usernameFld = $("#usernameFld"),
-    //     $passwordFld = $("#passwordFld"),
-    //     $firstNameFld = $("#firstNameFld"),
-    //     $lastNameFld = $("#lastNameFld"),
-    //     $roleFld = $("#roleFld");
-    // var $removeBtn = $(".wbdv-remove"), // Should remove and edit be vars?
-    //     $editBtn = $(".wbdv-edit"),
-    //     $createBtn = $(".wbdv-create"),
-    //     $updateBtn = $(".wbdv-update"); // Missing the Update button and Search button
     var $usernameFld, $passwordFld;
     var $firstNameFld, $lastNameFld, $roleFld;
     var $removeBtn, $editBtn, $createBtn, $updateBtn;
     var $userRowTemplate, $tbody;
     var userService = new AdminUserServiceClient();
-    var editIndex, selectedUserId, selectedUser;
+    var users, editIndex, selectedUserId, selectedUser;
     $(main);
-
-    var users;
-    //     {username: "alice1", firstName: "Alice", lastName: "Meg", role: "Faculty"},
-    //     {username: "bob2", firstName: "Bob", lastName: "Yams", role: "Student"},
-    //     {username: "kris3", firstName: "Kris", lastName: "Car", role: "Faculty"},
-    //     {username: "groot4", firstName: "Groot", lastName: "Avengers", role: "Faculty"},
-    //     {username: "git5", firstName: "Git", lastName: "Hub", role: "Admin"}
-    // ]
 
     function main() {
         $usernameFld = $("#usernameFld");
@@ -35,7 +18,7 @@
         $createBtn = $(".wbdv-create");
         $createBtn.click(createUser);
         $updateBtn = $(".wbdv-update");
-        $updateBtn.click(updateUser)
+        $updateBtn.click(updateUser);
 
         $userRowTemplate = $(".wbdv-template");
         $tbody = $('.wbdv-tbody');
@@ -105,7 +88,7 @@
                     $firstNameFld.val(userInfo.firstName);
                     $lastNameFld.val(userInfo.lastName);
                     $roleFld.val(userInfo.role);
-                    selectedUser = userInfo
+                    selectedUser = userInfo;
                 });
         }
         catch (err) {
@@ -122,12 +105,11 @@
         selectedUser.lastName = $lastNameFld.val();
         selectedUser.role = $roleFld.val();
         try {
-            console.log('before server update', selectedUser)
+            console.log('before server update', selectedUser);
             userService.updateUser(selectedUserId, selectedUser)
                 .then(function (userServerInfo) {
-                    console.log(userServerInfo, "selectedUser", selectedUser)
+                    console.log(userServerInfo, "selectedUser", selectedUser);
                     users[editIndex] = selectedUser;
-
                     renderUsers(users);
                     resetInputFields();
                 });
@@ -137,6 +119,7 @@
         }
     }
 
+    // Renders the table of current users
     function renderUsers(users) {
         $tbody.empty();
         for(var u = 0; u < users.length; u++) {
@@ -171,5 +154,4 @@
         $lastNameFld.val("");
         $roleFld[0].selectedIndex=0;
     }
-
 }) ()

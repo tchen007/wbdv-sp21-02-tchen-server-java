@@ -1,5 +1,4 @@
 // Implements the user service client encapsulating all data communication with server
-// function will be class in
 
 function AdminUserServiceClient() {
     this.createUser = createUser;
@@ -21,17 +20,17 @@ function AdminUserServiceClient() {
         }).then(function (response) {
             return response.json();
         }).catch(function () {
-            throw new Error('Failed to create new user')
+            throw new Error('Failed to create new user');
         });
     }
 
     function findAllUsers() {
         return fetch(self.url)
             .then(function (response) {
-                return response.json()
+                return response.json();
             })
             .catch(function () {
-                throw new Error('Could not load users')
+                throw new Error('Could not load users');
             });
     }
 
@@ -39,11 +38,11 @@ function AdminUserServiceClient() {
         return fetch(`${self.url}/${userId}`)
             .then(function (response) {
                 console.log("finduserById");
-                return response.json()
+                return response.json();
             })
             .catch(function () {
-                throw new Error('Could not retrieve user info')
-            })
+                throw new Error('Could not retrieve user info');
+            });
     }
 
     function updateUser(userId, user) {
@@ -53,7 +52,7 @@ function AdminUserServiceClient() {
             body: JSON.stringify(user)
         })
         .catch(function () {
-            throw new Error('Failed to update user')
+            throw new Error('Failed to update user');
         });
     }
 
@@ -62,7 +61,7 @@ function AdminUserServiceClient() {
             method: DELETE
         })
             .catch(function () {
-                throw new Error('Failed to delete user')
-            })
+                throw new Error('Failed to delete user');
+            });
     }
 }
