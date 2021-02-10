@@ -14,7 +14,7 @@
     var $removeBtn, $editBtn, $createBtn, $updateBtn;
     var $userRowTemplate, $tbody;
     var userService = new AdminUserServiceClient();
-    var editIndex, selectedUserId;
+    var editIndex, selectedUserId, selectedUser;
     $(main);
 
     var users;
@@ -105,6 +105,7 @@
                     $firstNameFld.val(userInfo.firstName);
                     $lastNameFld.val(userInfo.lastName);
                     $roleFld.val(userInfo.role);
+                    selectedUser = userInfo
                 });
         }
         catch (err) {
@@ -115,18 +116,18 @@
     function updateUser() {
         console.log("updateUser");
         console.log(selectedUserId, editIndex);
-        var updateUser = {
-            username: $usernameFld.val(),
-            password: $passwordFld.val(),
-            firstName: $firstNameFld.val(),
-            lastName: $lastNameFld.val(),
-            role: $roleFld.val()
-        };
+        selectedUser.username = $usernameFld.val();
+        selectedUser.password = $passwordFld.val();
+        selectedUser.firstName = $firstNameFld.val();
+        selectedUser.lastName = $lastNameFld.val();
+        selectedUser.role = $roleFld.val();
         try {
-            userService.updateUser(selectedUserId, updateUser)
+            console.log('before server update', selectedUser)
+            userService.updateUser(selectedUserId, selectedUser)
                 .then(function (userServerInfo) {
-                    console.log(userServerInfo)
-                    users[editIndex] = updateUser;
+                    console.log(userServerInfo, "selectedUser", selectedUser)
+                    users[editIndex] = selectedUser;
+
                     renderUsers(users);
                     resetInputFields();
                 });
