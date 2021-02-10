@@ -16,7 +16,7 @@
     var userService = new AdminUserServiceClient();
     $(main);
 
-    var users = [];
+    var users;
     //     {username: "alice1", firstName: "Alice", lastName: "Meg", role: "Faculty"},
     //     {username: "bob2", firstName: "Bob", lastName: "Yams", role: "Student"},
     //     {username: "kris3", firstName: "Kris", lastName: "Car", role: "Faculty"},
@@ -35,16 +35,17 @@
         // $editBtn = $(".wbdv-edit");
 
         $createBtn = $(".wbdv-create");
-        $createBtn.click(function () {
-                let newUser = {
-                    username: $usernameFld.val(),
-                    firstName: $firstNameFld.val(),
-                    lastName: $lastNameFld.val(),
-                    role: $roleFld.val()
-                }
-                createUser(newUser);
-            }
-        );
+        $createBtn.click(createUser);
+        // $createBtn.click(function () {
+        //         let newUser = {
+        //             username: $usernameFld.val(),
+        //             firstName: $firstNameFld.val(),
+        //             lastName: $lastNameFld.val(),
+        //             role: $roleFld.val()
+        //         }
+        //         createUser(newUser);
+        //     }
+        // );
         $updateBtn = $(".wbdv-update");
 
         $userRowTemplate = $(".wbdv-template");
@@ -57,10 +58,21 @@
             });
     }
 
-    function createUser(user) {
-        users.push(user);
-        renderUsers(users);
-        resetInputFields();
+    function createUser() {
+        var newUser = {
+            username: $usernameFld.val(),
+            firstName: $firstNameFld.val(),
+            lastName: $lastNameFld.val(),
+            role: $roleFld.val()
+        };
+        userService
+            .createUser(newUser)
+            .then(function () {
+                users.push(newUser);
+                renderUsers(users);
+                resetInputFields();
+            });
+        // users.push(user);
     }
 
     function deleteUser(event) {
@@ -92,7 +104,7 @@
                     <td class="wbdv-actions">
                         <span class="text-nowrap float-right">
                             <button class="btn wbdv-remove fa-2x fa fa-times" id="${u}"></button>
-                            <button class="btn wbdv-edit fa-2x fa fa-pencil"></button>
+                            <button class="btn wbdv-edit fa-2x fa fa-pencil" id="${user._id}"></button>
                         </span>
                     </td>
                 </tr>`

@@ -7,10 +7,22 @@ function AdminUserServiceClient() {
     this.findUserById = findUserById;
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
-    // this.url = 'https://wbdv-generic-server.herokuapp.com/api/tchen007/users';
-    this.url = 'https://wbdv-generic-server.herokuapp.com/api/jannunzi/users';
+    this.url = 'https://wbdv-generic-server.herokuapp.com/api/tchen007/users';
+    // this.url = 'https://wbdv-generic-server.herokuapp.com/api/jannunzi/users';
     var self = this;
-    function createUser(user) {}
+
+    const POST = 'POST', DELETE = 'DELETE', PUT = 'PUT';
+    const HEADER = {'content-type': 'application/json'}
+
+    function createUser(user) {
+        return fetch(self.url, {
+            method: POST,
+            headers: HEADER,
+            body: JSON.stringify(user)
+        }).then(function (response) {
+            return response.json();
+        })
+    }
 
     function findAllUsers() {
         return fetch(self.url)
