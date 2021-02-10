@@ -13,16 +13,16 @@
     var $firstNameFld, $lastNameFld, $roleFld;
     var $removeBtn, $editBtn, $createBtn, $updateBtn;
     var $userRowTemplate, $tbody;
-    // var userService = new AdminUserServiceClient();
+    var userService = new AdminUserServiceClient();
     $(main);
 
-    const users = [
-        {username: "alice1", firstName: "Alice", lastName: "Meg", role: "Faculty"},
-        {username: "bob2", firstName: "Bob", lastName: "Yams", role: "Student"},
-        {username: "kris3", firstName: "Kris", lastName: "Car", role: "Faculty"},
-        {username: "groot4", firstName: "Groot", lastName: "Avengers", role: "Faculty"},
-        {username: "git5", firstName: "Git", lastName: "Hub", role: "Admin"}
-    ]
+    var users = [];
+    //     {username: "alice1", firstName: "Alice", lastName: "Meg", role: "Faculty"},
+    //     {username: "bob2", firstName: "Bob", lastName: "Yams", role: "Student"},
+    //     {username: "kris3", firstName: "Kris", lastName: "Car", role: "Faculty"},
+    //     {username: "groot4", firstName: "Groot", lastName: "Avengers", role: "Faculty"},
+    //     {username: "git5", firstName: "Git", lastName: "Hub", role: "Admin"}
+    // ]
 
     function main() {
         $usernameFld = $("#usernameFld");
@@ -49,28 +49,29 @@
 
         $userRowTemplate = $(".wbdv-template");
         $tbody = $('.wbdv-tbody');
-        renderUsers(users);
+
+        users = userService.findAllUsers()
+            .then(function (serverUsers) {
+                users = serverUsers
+                renderUsers(users);
+            });
     }
 
     function createUser(user) {
         users.push(user);
         renderUsers(users);
-        $usernameFld.val("");
-        $passwordFld.val("");
-        $firstNameFld.val("");
-        $lastNameFld.val("");
-        $roleFld[0].selectedIndex=0;
+        resetInputFields();
     }
 
     function deleteUser(event) {
-        console.log(event.target)
-        console.log($removeBtn.attr("class"))
+        console.log(event.target);
+        console.log($removeBtn.attr("class"));
 
-        var removeBtn = $(event.target)
-        var removeId = removeBtn.attr("id")
-        console.log(removeId)
-        users.splice(removeId, 1)
-        renderUsers(users)
+        var removeBtn = $(event.target);
+        var removeId = removeBtn.attr("id");
+        console.log(removeId);
+        users.splice(removeId, 1);
+        renderUsers(users);
     }
 
     function selectUser() { } // WHAT IS THIS SUPPOSE TO DO?
@@ -95,11 +96,21 @@
                         </span>
                     </td>
                 </tr>`
-            )
-        };
+            );
+        }
         $removeBtn = $(".wbdv-remove");
         $removeBtn.click(deleteUser);
         // $editBtn = $(".wbdv-edit")
+
+
+    }
+
+    function resetInputFields() {
+        $usernameFld.val("");
+        $passwordFld.val("");
+        $firstNameFld.val("");
+        $lastNameFld.val("");
+        $roleFld[0].selectedIndex=0;
     }
 
 }) ()
