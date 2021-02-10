@@ -14,6 +14,7 @@
     var $removeBtn, $editBtn, $createBtn, $updateBtn;
     var $userRowTemplate, $tbody;
     var userService = new AdminUserServiceClient();
+    var editIndex, selectedUserId;
     $(main);
 
     var users;
@@ -31,36 +32,27 @@
         $lastNameFld = $("#lastNameFld");
         $roleFld = $("#roleFld");
 
-        // $removeBtn = $(".wbdv-remove"); // Should remove and edit be vars?
-        // $editBtn = $(".wbdv-edit");
-
         $createBtn = $(".wbdv-create");
         $createBtn.click(createUser);
-        // $createBtn.click(function () {
-        //         let newUser = {
-        //             username: $usernameFld.val(),
-        //             firstName: $firstNameFld.val(),
-        //             lastName: $lastNameFld.val(),
-        //             role: $roleFld.val()
-        //         }
-        //         createUser(newUser);
-        //     }
-        // );
         $updateBtn = $(".wbdv-update");
+        $updateBtn.click(updateUser)
 
         $userRowTemplate = $(".wbdv-template");
         $tbody = $('.wbdv-tbody');
 
         users = userService.findAllUsers()
             .then(function (serverUsers) {
-                users = serverUsers
+                users = serverUsers;
+                console.log(users);
                 renderUsers(users);
             });
     }
 
+    // For the + icon on the second row
     function createUser() {
         var newUser = {
             username: $usernameFld.val(),
+            password: $passwordFld.val(),
             firstName: $firstNameFld.val(),
             lastName: $lastNameFld.val(),
             role: $roleFld.val()
@@ -68,8 +60,8 @@
         try {
             userService
                 .createUser(newUser)
-                .then(function () {
-                    users.push(newUser);
+                .then(function (userServerInfo) {
+                    users.push(userServerInfo);
                     renderUsers(users);
                     resetInputFields();
                 });
@@ -79,30 +71,70 @@
         }
     }
 
+    // For the X icon
     function deleteUser(event) {
         var removeBtn = $(event.target);
         var removeIndex = removeBtn.attr("id").split('-')[1];
-        var removeUserId = users[removeIndex]._id
-        console.log(removeUserId);
+        var removeUserId = users[removeIndex]._id;
         try {
             userService
                 .deleteUser(removeUserId)
                 .then(function () {
                     users.splice(removeIndex, 1);
                     renderUsers(users);
-                })
-                // .then(function () {})
-                    // users.splice(removeIdNum, 1);
-
+                });
         }
         catch (err) {
             console.log(err.name + ": " + err.message);
         }
     }
 
-    function selectUser() { } // WHAT IS THIS SUPPOSE TO DO?
-        // It is when the pencil is pressed the 2nd row is populated
-    function updateUser() { }
+    // For the pencil icon, it will autofill the 2nd row to update
+    function selectUser(event) {
+        console.log("users", users)
+        var editBtn = $(event.target);
+        editIndex = editBtn.attr("id").split('-')[1];
+        selectedUserId = users[editIndex]._id;
+        console.log(selectedUserId);
+        try {
+            userService.findUserById(selectedUserId)
+                .then(function (userInfo) {
+                    console.log("userInfo from findUserById", userInfo);
+                    $usernameFld.val(userInfo.username);
+                    $passwordFld.val(userInfo.password);
+                    $firstNameFld.val(userInfo.firstName);
+                    $lastNameFld.val(userInfo.lastName);
+                    $roleFld.val(userInfo.role);
+                });
+        }
+        catch (err) {
+            console.log(err.name + ": " + err.message);
+        }
+    }
+
+    function updateUser() {
+        console.log("updateUser");
+        console.log(selectedUserId, editIndex);
+        var updateUser = {
+            username: $usernameFld.val(),
+            password: $passwordFld.val(),
+            firstName: $firstNameFld.val(),
+            lastName: $lastNameFld.val(),
+            role: $roleFld.val()
+        };
+        try {
+            userService.updateUser(selectedUserId, updateUser)
+                .then(function (userServerInfo) {
+                    console.log(userServerInfo)
+                    users[editIndex] = updateUser;
+                    renderUsers(users);
+                    resetInputFields();
+                });
+        }
+        catch (err) {
+            console.log(err.name + ": " + err.message);
+        }
+    }
 
     function renderUsers(users) {
         $tbody.empty();
@@ -111,7 +143,7 @@
             $tbody.append(
                 `<tr class="wbdv-template wbdv-user">
                     <td class="wbdv-username pt-4 pl-3">${user.username}</td>
-                    <td>&nbsp;</td>
+                    <td class="pt-4 pl-3">*****</td>
                     <td class="wbdv-first-name pt-4 pl-3">${user.firstName}</td>
                     <td class="wbdv-last-name pt-4 pl-3">${user.lastName}</td>
                     <td class="wbdv-role pt-4 pl-3">${user.role}</td>
@@ -126,8 +158,11 @@
         }
         $removeBtn = $(".wbdv-remove");
         $removeBtn.click(deleteUser);
+        $editBtn = $(".wbdv-edit");
+        $editBtn.click(selectUser);
     }
 
+    // Helper function to clear input fields
     function resetInputFields() {
         $usernameFld.val("");
         $passwordFld.val("");
