@@ -47,6 +47,7 @@
                     users.push(userServerInfo);
                     renderUsers(users);
                     resetInputFields();
+                    clearSelected();
                 });
         }
         catch (err) {
@@ -99,12 +100,12 @@
     function updateUser() {
         console.log("updateUser");
         console.log(selectedUserId, editIndex);
-        selectedUser.username = $usernameFld.val();
-        selectedUser.password = $passwordFld.val();
-        selectedUser.firstName = $firstNameFld.val();
-        selectedUser.lastName = $lastNameFld.val();
-        selectedUser.role = $roleFld.val();
         try {
+            selectedUser.username = $usernameFld.val();
+            selectedUser.password = $passwordFld.val();
+            selectedUser.firstName = $firstNameFld.val();
+            selectedUser.lastName = $lastNameFld.val();
+            selectedUser.role = $roleFld.val();
             console.log('before server update', selectedUser);
             userService.updateUser(selectedUserId, selectedUser)
                 .then(function (userServerInfo) {
@@ -112,6 +113,7 @@
                     users[editIndex] = selectedUser;
                     renderUsers(users);
                     resetInputFields();
+                    clearSelected();
                 });
         }
         catch (err) {
@@ -154,4 +156,12 @@
         $lastNameFld.val("");
         $roleFld[0].selectedIndex=0;
     }
+
+    // Helper to clear selected after add or update
+    function clearSelected() {
+        selectedUser = null;
+        selectedUserId = null;
+        editIndex = null;
+    }
+
 }) ()
