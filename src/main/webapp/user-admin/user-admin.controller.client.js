@@ -65,25 +65,39 @@
             lastName: $lastNameFld.val(),
             role: $roleFld.val()
         };
-        userService
-            .createUser(newUser)
-            .then(function () {
-                users.push(newUser);
-                renderUsers(users);
-                resetInputFields();
-            });
-        // users.push(user);
+        try {
+            userService
+                .createUser(newUser)
+                .then(function () {
+                    users.push(newUser);
+                    renderUsers(users);
+                    resetInputFields();
+                });
+        }
+        catch (err) {
+            console.log(err.name + ": " + err.message);
+        }
     }
 
     function deleteUser(event) {
-        console.log(event.target);
-        console.log($removeBtn.attr("class"));
-
         var removeBtn = $(event.target);
-        var removeId = removeBtn.attr("id");
-        console.log(removeId);
-        users.splice(removeId, 1);
-        renderUsers(users);
+        var removeIndex = removeBtn.attr("id").split('-')[1];
+        var removeUserId = users[removeIndex]._id
+        console.log(removeUserId);
+        try {
+            userService
+                .deleteUser(removeUserId)
+                .then(function () {
+                    users.splice(removeIndex, 1);
+                    renderUsers(users);
+                })
+                // .then(function () {})
+                    // users.splice(removeIdNum, 1);
+
+        }
+        catch (err) {
+            console.log(err.name + ": " + err.message);
+        }
     }
 
     function selectUser() { } // WHAT IS THIS SUPPOSE TO DO?
@@ -103,8 +117,8 @@
                     <td class="wbdv-role pt-4 pl-3">${user.role}</td>
                     <td class="wbdv-actions">
                         <span class="text-nowrap float-right">
-                            <button class="btn wbdv-remove fa-2x fa fa-times" id="${u}"></button>
-                            <button class="btn wbdv-edit fa-2x fa fa-pencil" id="${user._id}"></button>
+                            <button class="btn wbdv-remove fa-2x fa fa-times" id="removeBtn-${u}"></button>
+                            <button class="btn wbdv-edit fa-2x fa fa-pencil" id="editBtn-${u}"></button>
                         </span>
                     </td>
                 </tr>`
@@ -112,9 +126,6 @@
         }
         $removeBtn = $(".wbdv-remove");
         $removeBtn.click(deleteUser);
-        // $editBtn = $(".wbdv-edit")
-
-
     }
 
     function resetInputFields() {

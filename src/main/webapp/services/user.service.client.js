@@ -8,7 +8,6 @@ function AdminUserServiceClient() {
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
     this.url = 'https://wbdv-generic-server.herokuapp.com/api/tchen007/users';
-    // this.url = 'https://wbdv-generic-server.herokuapp.com/api/jannunzi/users';
     var self = this;
 
     const POST = 'POST', DELETE = 'DELETE', PUT = 'PUT';
@@ -27,11 +26,22 @@ function AdminUserServiceClient() {
     function findAllUsers() {
         return fetch(self.url)
             .then(function (response) {
-            return response.json();
-        })
+                return response.json()
+            })
+            .catch(function () {
+                throw new Error('Could not load users')
+            });
     }
 
     function findUserById(userId) {}
     function updateUser(userId, user) {}
-    function deleteUser(userId) {}
+
+    function deleteUser(userId) {
+        return fetch(`${self.url}/${userId}`, {
+            method: DELETE
+        })
+            .catch(function () {
+                throw new Error('Failed to delete user')
+            })
+    }
 }
