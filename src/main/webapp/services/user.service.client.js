@@ -37,7 +37,6 @@ function AdminUserServiceClient() {
     function findUserById(userId) {
         return fetch(`${self.url}/${userId}`)
             .then(function (response) {
-                console.log("finduserById");
                 return response.json();
             })
             .catch(function () {

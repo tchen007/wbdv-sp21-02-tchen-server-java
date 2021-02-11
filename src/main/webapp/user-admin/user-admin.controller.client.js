@@ -26,7 +26,6 @@
         users = userService.findAllUsers()
             .then(function (serverUsers) {
                 users = serverUsers;
-                console.log(users);
                 renderUsers(users);
             });
     }
@@ -75,11 +74,9 @@
 
     // For the pencil icon, it will autofill the 2nd row to update
     function selectUser(event) {
-        console.log("users", users)
         var editBtn = $(event.target);
         editIndex = editBtn.attr("id").split('-')[1];
         selectedUserId = users[editIndex]._id;
-        console.log(selectedUserId);
         try {
             userService.findUserById(selectedUserId)
                 .then(function (userInfo) {
@@ -97,25 +94,23 @@
         }
     }
 
+    // For the checkmark icon to update existing record
     function updateUser() {
-        console.log("updateUser");
-        console.log(selectedUserId, editIndex);
         try {
             selectedUser.username = $usernameFld.val();
             selectedUser.password = $passwordFld.val();
             selectedUser.firstName = $firstNameFld.val();
             selectedUser.lastName = $lastNameFld.val();
             selectedUser.role = $roleFld.val();
-            console.log('before server update', selectedUser);
             userService.updateUser(selectedUserId, selectedUser)
                 .then(function (userServerInfo) {
-                    console.log(userServerInfo, "selectedUser", selectedUser);
                     users[editIndex] = selectedUser;
                     renderUsers(users);
                     resetInputFields();
                     clearSelected();
                 });
         }
+        // In future could catch null error or could grey out checkmark icon.
         catch (err) {
             console.log(err.name + ": " + err.message);
         }
