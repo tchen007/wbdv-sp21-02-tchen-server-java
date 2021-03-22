@@ -10,16 +10,6 @@ import java.util.List;
 @Service
 public class WidgetService {
     private List<Widget> widgets = new ArrayList<Widget>();
-    {
-        Widget w1 = new Widget(123l, "ABC123", "HEADING", 1, "Welcome to Widgets", "topic1");
-        Widget w2 = new Widget(234l, "ABC234", "PARAGRAPH", 1, "This is a paragraph", "topic1");
-        Widget w3 = new Widget(345l, "ABC234", "HEADING", 2, "Welcome to WebDev", "topic2");
-        Widget w4 = new Widget(456l, "ABC234", "PARAGRAPH", 1, "Lorem ipsum", "topic2");
-        widgets.add(w1);
-        widgets.add(w2);
-        widgets.add(w3);
-        widgets.add(w4);
-    }
 
     public Widget createWidget(Widget widget) {
         Long id = (new Date()).getTime();
@@ -41,22 +31,15 @@ public class WidgetService {
     }
 
     public int updateWidget(Long widgetId, Widget newWidget) {
-        int widgetNum = 0;
-        for(Widget w: widgets) {
-            widgetNum++;
+        for(int i = 0; i < widgets.size(); i++) {
+            Widget w = widgets.get(i);
             if(w.getId().equals(widgetId)) {
-                widgets.set(widgetNum, newWidget);
+                widgets.set(i, newWidget);
                 return 1;
             }
         }
         return 0;
     }
-    //        for(int i=0; i<widgets.size(); i++) {
-//            Widget w = widgets.get(i);
-//            if(w.getId().equals(id)) {
-//                widgets.set(i, newWidget);
-//                return 1;
-//            }
 
     public int deleteWidget(Long widgetId) {
         for(int i = 0; i < widgets.size(); i++) {

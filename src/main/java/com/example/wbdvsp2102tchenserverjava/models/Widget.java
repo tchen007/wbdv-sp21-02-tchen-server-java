@@ -15,14 +15,13 @@ public class Widget {
     private String value;
     private String topicId;
 
-    public Widget() {
+    public Widget() {}
 
-    }
-
-    public Widget(Long id, String name, String type, Integer widgetOrder, String text, String topicId) {
+    public Widget(Long id, String name, String type, Integer size, Integer widgetOrder, String text, String topicId) {
         this.name = name;
         this.id = id;
         this.type = type;
+        this.size = size;
         this.widgetOrder = widgetOrder;
         this.text = text;
         this.topicId = topicId;
@@ -150,10 +149,5 @@ public class Widget {
         this.topicId = topicId;
     }
 
-//    @Override
-//    protected Widget clone() {
-//        Widget w = new Widget();
-//
-//    }
 }
 

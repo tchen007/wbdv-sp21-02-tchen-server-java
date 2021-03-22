@@ -9,6 +9,7 @@ import java.util.List;
 
 // RESTful endpoints
 @RestController
+@CrossOrigin(origins = "*")
 public class WidgetController {
 // Autowired will auto instantiate service and provide reference to the service variable
     @Autowired
