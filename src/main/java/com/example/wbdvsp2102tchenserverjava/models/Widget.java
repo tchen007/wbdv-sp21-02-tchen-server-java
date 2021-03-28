@@ -29,7 +29,7 @@ public class Widget {
     }
 
     public Widget(String name, Long id, String type, Integer widgetOrder, String text, String url, Integer size,
-                  Integer width, Integer height, String cssClass, String style, String value, String topicId) {
+                  Integer width, Integer height, String cssClass, String style, String value, Boolean isOrdered, String topicId) {
         this.name = name;
         this.id = id;
         this.type = type;
@@ -42,6 +42,7 @@ public class Widget {
         this.cssClass = cssClass;
         this.style = style;
         this.value = value;
+        this.isOrdered = isOrdered;
         this.topicId = topicId;
     }
 
