@@ -145,8 +145,8 @@ public class Widget {
         return isOrdered;
     }
 
-    public void setOrdered(Boolean ordered) {
-        isOrdered = ordered;
+    public void setOrdered(Boolean isOrdered) {
+        this.isOrdered = isOrdered;
     }
     public String getTopicId() {
         return topicId;
