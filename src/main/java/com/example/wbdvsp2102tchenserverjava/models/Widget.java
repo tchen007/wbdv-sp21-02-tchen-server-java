@@ -142,11 +142,11 @@ public class Widget {
 
         this.value = value;
     }
-    public Boolean getOrdered() {
+    public Boolean getIsOrdered() {
         return isOrdered;
     }
 
-    public void setOrdered(Boolean isOrdered) {
+    public void setIsOrdered(Boolean isOrdered) {
         this.isOrdered = isOrdered;
     }
     public String getTopicId() {
