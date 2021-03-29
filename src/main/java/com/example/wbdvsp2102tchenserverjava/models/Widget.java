@@ -13,6 +13,7 @@ public class Widget {
     private String name;
     private String type;
     private Integer widgetOrder;
+    @Column(columnDefinition = "TEXT")
     private String text;
     private String url;
     private Integer size;
