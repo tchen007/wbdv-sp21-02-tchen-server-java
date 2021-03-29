@@ -1,70 +1,56 @@
 package com.example.wbdvsp2102tchenserverjava.services;
 
 import com.example.wbdvsp2102tchenserverjava.models.Widget;
+import com.example.wbdvsp2102tchenserverjava.repositories.WidgetRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
 public class WidgetService {
-    private List<Widget> widgets = new ArrayList<Widget>();
+    @Autowired
+    WidgetRepository repository;
 
     public Widget createWidget(Widget widget) {
-        Long id = (new Date()).getTime();
-        widget.setId(id);
-        widgets.add(widget);
-        return widget;
+        return repository.save(widget);
     }
 
-//   Possible Future Bug - Returns the widgets list in WidgetService could change original since shallow copy
-//    Need to override Widget.clone() and implement Cloneable Interface
     public List<Widget> findWidgetsForTopic(String topicId) {
-        List<Widget> widgetsForTopic = new ArrayList<Widget>();
-        for(Widget w: widgets) {
-            if(w.getTopicId().equals(topicId)) {
-                widgetsForTopic.add(w);
-            }
-        }
-        return widgetsForTopic;
+        return repository.findWidgetsForTopic(topicId);
     }
 
     public int updateWidget(Long widgetId, Widget newWidget) {
-        for(int i = 0; i < widgets.size(); i++) {
-            Widget w = widgets.get(i);
-            if(w.getId().equals(widgetId)) {
-                widgets.set(i, newWidget);
-                return 1;
-            }
-        }
-        return 0;
+        Widget originalWidget = repository.findById(widgetId).get();
+
+        originalWidget.setName(newWidget.getName());
+        originalWidget.setType(newWidget.getType());
+        originalWidget.setWidgetOrder(newWidget.getWidgetOrder());
+        originalWidget.setText(newWidget.getText());
+        originalWidget.setUrl(newWidget.getUrl());
+        originalWidget.setSize(newWidget.getSize());
+        originalWidget.setWidth(newWidget.getWidth());
+        originalWidget.setHeight(newWidget.getHeight());
+        originalWidget.setCssClass(newWidget.getCssClass());
+        originalWidget.setStyle(newWidget.getStyle());
+        originalWidget.setValue(newWidget.getValue());
+        originalWidget.setIsOrdered(newWidget.getIsOrdered());
+
+        repository.save(originalWidget);
+        return 1;
     }
 
     public int deleteWidget(Long widgetId) {
-        for(int i = 0; i < widgets.size(); i++) {
-            Widget currentWidget = widgets.get(i);
-            if (currentWidget.getId().equals(widgetId)) {
-                widgets.remove(i);
-                return 1;
-            }
-        }
-        return 0;
+        repository.deleteById(widgetId);
+        return 1;
     }
 
-//    Potential future bug returning widgets which can be mutated
-//    Should be returning deep copy of widgets instead
     public List<Widget> findAllWidgets() {
-        return widgets;
+        return (List<Widget>) repository.findAll();
     }
 
     public Widget findWidgetById(Long widgetId) {
-        for(Widget w: widgets) {
-            if(w.getId().equals(widgetId)){
-                return w;
-            }
-        }
-        return null;
+        return repository.findById(widgetId).get();
     }
 
 }
