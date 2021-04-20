@@ -9,7 +9,7 @@ import java.util.List;
 
 // RESTful endpoints
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:3000", "http://anifansonly.herokuapp.com"})
 public class WidgetController {
 // Autowired will auto instantiate service and provide reference to the service variable
     @Autowired
